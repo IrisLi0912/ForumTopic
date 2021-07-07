@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1082109065981",
+    "firebase_url": "https://forumtopic-test-default-rtdb.firebaseio.com",
+    "project_id": "forumtopic-test",
+    "storage_bucket": "forumtopic-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082109065981:android:90d5ada13484f25a67dc94",
+        "android_client_info": {
+          "package_name": "com.example.forumtopictest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082109065981-ke0vs0cabraveaqip80mh9vrh3st4ol7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChtSc_q9_ScbjJ3ikLAUiBNo0nW1yOlrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082109065981-ke0vs0cabraveaqip80mh9vrh3st4ol7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

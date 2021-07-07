@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TopicDetails">
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="412dp"
+        android:layout_height="732dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivDetailDiscussionCover"
+            android:layout_width="413dp"
+            android:layout_height="192dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/forumcover" />
+
+        <TextView
+            android:id="@+id/ttDiscussionTag"
+            android:layout_width="234dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="20dp"
+            android:text="Threatened Culture"
+            android:textColor="#E9690B"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDetailDiscussionCover" />
+
+        <TextView
+            android:id="@+id/ttDiscussionDetailTitle"
+            android:layout_width="346dp"
+            android:layout_height="wrap_content"
+            android:text="What is your thought on the 2021 Reconciliation Australia Strategy?"
+            android:textColor="#571F1D"
+            android:textSize="20sp"
+            android:textStyle="bold"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ttDiscussionTag"
+            app:layout_constraintTop_toBottomOf="@+id/ttDiscussionTag" />
+
+        <TextView
+            android:id="@+id/ttDiscussionDate"
+            android:layout_width="157dp"
+            android:layout_height="15dp"
+            android:hint="2 july 2021"
+            app:layout_constraintBottom_toTopOf="@+id/ttDiscussionDetailDes"
+            app:layout_constraintStart_toStartOf="@+id/ttDiscussionDetailDes"
+            app:layout_constraintTop_toBottomOf="@+id/ttDiscussionDetailTitle" />
+
+        <TextView
+            android:id="@+id/ttDiscussionUsername"
+            android:layout_width="152dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="274dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ttDiscussionDetailTitle" />
+
+        <TextView
+            android:id="@+id/ttDiscussionDetailDes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Reconciliation Australia promotes and facilitates respect, trust and positive relationships between the wider Australian community and Aboriginal and Torres Strait Islander peoples. But for me, I don't think this program helps in sustaining our culture at all, I want to know your thoughts on this strategy?"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ttDiscussionDetailTitle"
+            app:layout_constraintTop_toBottomOf="@+id/ttDiscussionUsername" />
+
+        <EditText
+            android:id="@+id/ttComment"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="2dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Type here to reply..."
+            android:inputType="textMultiLine"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/ttDiscussionDetailDes"
+            app:layout_constraintStart_toEndOf="@+id/ivCurrentUserPic"
+            app:layout_constraintTop_toTopOf="@+id/ivCurrentUserPic" />
+
+        <ImageView
+            android:id="@+id/ivCurrentUserPic"
+            android:layout_width="59dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="@+id/ttDiscussionDetailDes"
+            app:layout_constraintTop_toBottomOf="@+id/ttDiscussionDetailDes"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/postCommentbtn"
+            android:layout_width="158dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="10dp"
+            android:text="Post Comment"
+            app:backgroundTint="#E9690B"
+            app:layout_constraintStart_toStartOf="@+id/ivCurrentUserPic"
+            app:layout_constraintTop_toBottomOf="@+id/ivCurrentUserPic" />
+
+        <TextView
+            android:id="@+id/ttNumberOfComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="32"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/postCommentbtn"
+            app:layout_constraintTop_toBottomOf="@+id/postCommentbtn" />
+
+        <TextView
+            android:id="@+id/textview9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="8dp"
+            android:text="Comments"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ttNumberOfComments"
+            app:layout_constraintTop_toBottomOf="@+id/postCommentbtn" />
+
+        <ImageView
+            android:id="@+id/likeBtn"
+            android:layout_width="32dp"
+            android:layout_height="37dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/ttDiscussionDetailTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ttDiscussionTag"
+            app:srcCompat="@drawable/ic_like" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvComments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="@+id/ttComment"
+            app:layout_constraintStart_toStartOf="@+id/ttNumberOfComments"
+            app:layout_constraintTop_toBottomOf="@+id/textview9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
