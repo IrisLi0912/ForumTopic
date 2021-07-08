@@ -13,6 +13,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,6 +29,7 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     Context mContext;
     List<Post> mData;
     private AdapterView.OnItemClickListener onItemClickListener;
+    FirebaseUser firebaseUser;
 
     ActionBar actionBar;
 
@@ -42,6 +50,9 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,  int i) {
         //get data
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Post post = mData.get(i);
 
         String userID = mData.get(i).getUid();
         String userEmail = mData.get(i).getuEmail();
@@ -65,6 +76,8 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         //set data in the post list
         holder.tv_DiscussionTitle.setText(postTitle);
         holder.tv_DiscussionTag.setText(postTag);
+        nrLikes(holder.tv_DiscussionLikeNumber,post.getpID());
+        nrComments(holder.tv_DiscussionCommentNumber, post.getpID());
 
 
 
@@ -102,7 +115,7 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_DiscussionTitle, tv_DiscussionTag; //tv_DiscussionLikeNumber,tv_DiscussionCommentNumber;
+        TextView tv_DiscussionTitle, tv_DiscussionTag, tv_DiscussionLikeNumber,tv_DiscussionCommentNumber;
         ImageView iv_DiscussionCover;
 
 
@@ -111,8 +124,8 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             tv_DiscussionTitle = itemView.findViewById(R.id.ttDiscussionTitle);
             iv_DiscussionCover = itemView.findViewById(R.id.ivDiscussionCover);
             tv_DiscussionTag = itemView.findViewById(R.id.ttDiscussionTag);
-//            tv_DiscussionLikeNumber = itemView.findViewById(R.id.ttDiscussionLikeNumber);
-//            tv_DiscussionCommentNumber = itemView.findViewById(R.id.ttDiscussionCommentNumber);
+            tv_DiscussionLikeNumber = itemView.findViewById(R.id.ttDiscussionLikeNumber);
+            tv_DiscussionCommentNumber = itemView.findViewById(R.id.ttDiscussionCommentNumber);
 
 
             //link to topic detail page
@@ -138,9 +151,43 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             });
 
 
-
         }
     }
+
+    //count number of likes for each topic
+    private void nrLikes(final TextView tv_DiscussionLikeNumber, String postID ){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Likes");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tv_DiscussionLikeNumber.setText(snapshot.getChildrenCount()+ " likes");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    ////count number of comments for each topic
+    private void nrComments(final TextView tv_DiscussionCommentNumber, String postID ){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Comment");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tv_DiscussionCommentNumber.setText(snapshot.getChildrenCount()+ " comments");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
 }
 
 

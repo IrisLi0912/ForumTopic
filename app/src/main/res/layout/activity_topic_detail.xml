@@ -44,7 +44,6 @@
             android:layout_marginTop="20dp"
             android:text="Threatened Culture"
             android:textColor="#E9690B"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivDetailDiscussionCover" />
 
@@ -56,7 +55,6 @@
             android:textColor="#571F1D"
             android:textSize="20sp"
             android:textStyle="bold"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/ttDiscussionTag"
             app:layout_constraintTop_toBottomOf="@+id/ttDiscussionTag" />

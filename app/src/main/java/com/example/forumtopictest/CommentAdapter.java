@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -20,7 +19,6 @@ import java.util.Locale;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
 
-    ActionBar actionBar;
     private Context mContext;
     private List<Comment> mData;
 
@@ -59,6 +57,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         ImageView ivCommentProfilePic;
         TextView ttUsername,ttDiscussionComment,ddDate;
+//        ImageView  ttLike; //ttReply
 
         public CommentViewHolder(View itemView) {
             super(itemView);
@@ -66,6 +65,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             ttUsername = itemView.findViewById(R.id.ttUsername);
             ttDiscussionComment = itemView.findViewById(R.id.ttDiscussionComment);
             ddDate = itemView.findViewById(R.id.ddDate);
+
+
         }
     }
 
