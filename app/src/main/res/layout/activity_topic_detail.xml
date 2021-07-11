@@ -158,8 +158,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvComments"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="372dp"
+            android:layout_height="153dp"
             android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="@+id/ttComment"
             app:layout_constraintStart_toStartOf="@+id/ttNumberOfComments"
