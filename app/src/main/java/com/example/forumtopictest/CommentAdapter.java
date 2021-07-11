@@ -42,7 +42,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         Glide.with(mContext).load(item.getUimg()).into(holder.ivCommentProfilePic);
         holder.ttUsername.setText(item.getUname());
         holder.ttDiscussionComment.setText(item.getContent());
-        holder.ddDate.setText(timestampToString((Long)mData.get(position).getTimestamp()));
+//        holder.ddDate.setText(timestampToString((Long)mData.get(position).getTimestamp()));
+        //this line is bugged
 
 
 }

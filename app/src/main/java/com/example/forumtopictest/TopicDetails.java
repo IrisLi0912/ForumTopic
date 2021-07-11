@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -142,7 +143,11 @@ public class TopicDetails extends AppCompatActivity {
                 String uid = firebaseUser.getUid();
                 String uname = firebaseUser.getDisplayName();
                 String uimg = firebaseUser.getPhotoUrl().toString();
-                Comment comment = new Comment(comment_content, uid, uimg, uname);
+
+                String postLinker = postID;
+                System.out.println(postID + "is GAYYY");
+
+                Comment comment = new Comment(comment_content, uid, uimg, uname, postLinker);
 
                 commentReference.setValue(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -209,9 +214,28 @@ public class TopicDetails extends AppCompatActivity {
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
 
                     Comment comment = snap.getValue(Comment.class);
-                    listComment.add(comment);
 
+                    listComment.add(comment);
+                    System.out.println();
+                    //if (postId = the child "postLinker" in comment) , then run "listComment.add(comment);"
                 }
+                //printing the array
+                //ALLOW THE APP TO ONLY SHOW COMMENT NEEDED
+                //eyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+
+                Iterator<Comment> iter = listComment.iterator();
+                while (iter.hasNext()) {
+                    Comment p = iter.next();
+                    if (!p.getPostLinker().equals(postID)) iter.remove();
+                    //if matched, delete the row.
+                }
+
+
+//                for(Comment model : listComment) {
+//                    //for testing
+//                    System.out.println(model.getPostLinker() + " test my man " +Math.random());
+//
+//                }
 
                 commentAdapter = new CommentAdapter(getApplicationContext(), listComment);
                 rvComment.setAdapter(commentAdapter);
@@ -240,4 +264,17 @@ public class TopicDetails extends AppCompatActivity {
 
 
     }
-}
+    class Model {
+
+        private String name;
+
+        public String getName() {
+            System.out.println( "get name is called with value" + getName());
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+            System.out.println( "set name is called");
+        }
+}}
