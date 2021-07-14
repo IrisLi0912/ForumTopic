@@ -13,6 +13,10 @@ public class Post {
     private String uPic;
     private String pTime;
 
+    private int commentCounter;
+
+
+
     public Post() {
     }
 
@@ -106,5 +110,12 @@ public class Post {
         this.uPic = uPic;
     }
 
+    public int getCommentCounter() {
+        return commentCounter;
+    }
+
+    public void setCommentCounter(int commentCounter) {
+        this.commentCounter = commentCounter;
+    }
 
 }

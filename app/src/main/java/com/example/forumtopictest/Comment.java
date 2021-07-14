@@ -9,18 +9,20 @@ public class Comment {
     private Object timestamp;
 
     private String postLinker;
+    private int commentCounter;
 
 
     public Comment() {
     }
 
-    public Comment(String content, String uid, String uimg, String uname, String postLinker) {
+    public Comment(String content, String uid, String uimg, String uname, String postLinker, int commentCounter) {
         this.content = content;
         this.uid = uid;
         this.uimg = uimg;
         this.uname = uname;
         this.postLinker = postLinker;
         this.timestamp = ServerValue.TIMESTAMP;
+        this.commentCounter=commentCounter;
 
     }
 
@@ -32,6 +34,14 @@ public class Comment {
         this.uname = uname;
         this.postLinker = postLinker;
         this.timestamp = timestamp;
+    }
+
+    public int getCommentCounter() {
+        return commentCounter;
+    }
+
+    public void setCommentCounter(int commentCounter) {
+        this.commentCounter = commentCounter;
     }
 
     public String getContent() {
