@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -147,7 +148,10 @@ public class TopicDetails extends AppCompatActivity {
                 String postLinker = postID;
                 System.out.println(postID + "is GAYYY");
 
-                Comment comment = new Comment(comment_content, uid, uimg, uname, postLinker);
+                int commentCount = 0;
+
+
+                Comment comment = new Comment(comment_content, uid, uimg, uname, postLinker, commentCount);
 
                 commentReference.setValue(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -236,10 +240,30 @@ public class TopicDetails extends AppCompatActivity {
 //                    System.out.println(model.getPostLinker() + " test my man " +Math.random());
 //
 //                }
+                System.out.println(listComment.size() + "list size");
+                int commentCount = listComment.size();
+                //TODO: send listComment.size() towards the post child and update value
+
+                uploadCommentCount(commentCount);
+
+
 
                 commentAdapter = new CommentAdapter(getApplicationContext(), listComment);
                 rvComment.setAdapter(commentAdapter);
+            }
 
+            DatabaseReference CommentCountRef = firebaseDatabase.getReference().child("Posts");
+            private void  uploadCommentCount(int commentCount){
+                //method for upload comments
+                HashMap hashMap = new HashMap();
+                hashMap.put("commentCount", commentCount);
+
+                CommentCountRef .child(postID).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        System.out.println("Comment Count updated" + commentCount);
+                    }
+                });
 
             }
 

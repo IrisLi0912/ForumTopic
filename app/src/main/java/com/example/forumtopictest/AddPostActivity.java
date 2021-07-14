@@ -243,7 +243,9 @@ public class AddPostActivity extends AppCompatActivity {
 
                             if (uriTask.isSuccessful()){
 
-                                HashMap<Object,String> hashMap = new HashMap<>();
+//                                HashMap<Object,String> hashMap = new HashMap<>();
+                                HashMap hashMap = new HashMap();
+                                hashMap.put("commentCount", 0);
                                 hashMap.put("uid", uid );
                                 hashMap.put("uName", name);
                                 hashMap.put("uEmail", email );
