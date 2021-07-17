@@ -58,7 +58,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         ImageView ivCommentProfilePic;
         TextView ttUsername,ttDiscussionComment,ddDate;
-//        ImageView  ttLike; //ttReply
+
 
         public CommentViewHolder(View itemView) {
             super(itemView);

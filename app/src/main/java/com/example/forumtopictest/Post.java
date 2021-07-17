@@ -1,5 +1,7 @@
 package com.example.forumtopictest;
 
+import com.google.firebase.database.ServerValue;
+
 public class Post {
 
     private String pID;
@@ -11,7 +13,7 @@ public class Post {
     private String uEmail;
     private String uName;
     private String uPic;
-    private String pTime;
+    private Long postTime;
 
     private int commentCounter;
 
@@ -20,23 +22,26 @@ public class Post {
     public Post() {
     }
 
-    public Post(String pID, String pTag, String pTitle, String pImage, String uid, String uEmail, String pTime) {
+
+    public Long getPostTime() {
+        return postTime;
+    }
+
+    public void setPostTime(Long postTime) {
+        this.postTime = postTime;
+    }
+
+    public Post(String pID, String pTag, String pTitle, String pImage, String uid, String uEmail, String uName, Long postTime) {
         this.pID = pID;
         this.pTag = pTag;
         this.pTitle = pTitle;
         this.pImage = pImage;
         this.uid = uid;
         this.uEmail = uEmail;
-        this.pTime = pTime;
+        this.uName = uName;
+        this.postTime = postTime;
     }
 
-    public String getpTime() {
-        return pTime;
-    }
-
-    public void setpTime(String pTime) {
-        this.pTime = pTime;
-    }
 
     public String getpID() {
         return pID;

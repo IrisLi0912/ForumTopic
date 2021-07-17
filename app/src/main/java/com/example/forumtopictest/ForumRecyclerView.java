@@ -102,13 +102,4 @@ public class ForumRecyclerView extends AppCompatActivity {
 
     }
 
-    private String timestampToString(long time) {
-
-        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-        calendar.setTimeInMillis(time);
-        String date = DateFormat.format("dd-MM-yyyy hh:mm aa",calendar).toString();
-        return date;
-
-
-    }
 }

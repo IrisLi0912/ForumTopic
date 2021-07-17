@@ -1,12 +1,11 @@
 package com.example.forumtopictest;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,16 +21,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 
 public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     Context mContext;
     List<Post> mData;
-    private AdapterView.OnItemClickListener onItemClickListener;
     FirebaseUser firebaseUser;
 
-    ActionBar actionBar;
 
     public PostAdapter(Context mContext, List<Post> mData) {
         this.mContext = mContext;
@@ -63,47 +62,20 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         String postTitle = mData.get(i).getpTitle();
         String postDec = mData.get(i).getpDes();
         String postImg = mData.get(i).getpImage();
-        String pTimeStamp = mData.get(i).getpTime();
 
-//        Calendar cal = Calendar.getInstance(Locale.getDefault());
-//        try {
-//            cal.setTimeInMillis(Long.parseLong(pTimeStamp));
-//        } catch(Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        String PostTime = DateFormat.format("dd-MM-yyyy hh:mm aa", cal).toString();
 
         //set data in the post list
         holder.tv_DiscussionTitle.setText(postTitle);
         holder.tv_DiscussionTag.setText(postTag);
-        nrLikes(holder.tv_DiscussionLikeNumber,post.getpID());
+        nrLikes(holder.tv_DiscussionLikeNumber, post.getpID());
         nrComments(holder.tv_DiscussionCommentNumber, post.getpID());
-
-
 
 
         //set post Image into discussion cover
 
         Picasso.get().load(postImg).into(holder.iv_DiscussionCover);
-//        Glide.get(mContext.getApplicationContext()).load(postTag).into(holder.tv_DiscussionTag);
-//        Glide.get(this).load(postTitle).into(holder.tv_DiscussionTitle);
 
-//         if (postImg == null) {
-//            holder.iv_DiscussionCover.setVisibility(View.GONE);
-//        }
-//         else {
-//            try {
-////                Glide.with(mContext).load(postImg).into(holder.iv_DiscussionCover);
-//                Picasso.get().load(postImg).into(holder.iv_DiscussionCover);
-//            }
-//            catch (Exception e) {
-//            }
-//
-//        }
     }
-
-    //handle btn click
-
 
 
     @Override
@@ -132,7 +104,7 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent TopicDetails = new Intent(mContext, TopicDetails.class);
+                    Intent TopicDetails = new Intent(mContext, TopicDetailActivity.class);
                     TopicDetails.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     int position = getAdapterPosition();
                     TopicDetails.putExtra("postImg", mData.get(position).getpImage());
@@ -142,7 +114,7 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     TopicDetails.putExtra("postID", mData.get(position).getpID());
                     TopicDetails.putExtra("userPic",mData.get(position).getuPic());
                     TopicDetails.putExtra("userName",mData.get(position).getuName());
-                    TopicDetails.putExtra("postTime",mData.get(position).getpTime());
+                    TopicDetails.putExtra("postTime",mData.get(position).getPostTime());
                     mContext.startActivity(TopicDetails);
 
                 }
@@ -157,9 +129,11 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     //count number of likes for each topic
     private void nrLikes(final TextView tv_DiscussionLikeNumber, String postID ){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Likes");
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.child(postID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
                 tv_DiscussionLikeNumber.setText(snapshot.getChildrenCount()+ " likes");
             }
 
@@ -172,12 +146,18 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     ////count number of comments for each topic
-    private void nrComments(final TextView tv_DiscussionCommentNumber, String postID ){
+    public void nrComments(final TextView tv_DiscussionCommentNumber, String postID ){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Comment");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                tv_DiscussionCommentNumber.setText(snapshot.getChildrenCount()+ " comments");
+                //TODO: add filter before count the number of comment
+
+                tv_DiscussionCommentNumber.setText(snapshot.getChildrenCount()+ "comments");
+
+
+
+
             }
 
             @Override
@@ -185,6 +165,15 @@ public class  PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             }
         });
+
+    }
+
+        private String timestampToString(long time) {
+
+        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+        calendar.setTimeInMillis(time);
+        String date = DateFormat.format("dd-MM-yyyy hh:mm aa",calendar).toString();
+        return date;
 
     }
 

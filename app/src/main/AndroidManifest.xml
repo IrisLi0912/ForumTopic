@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ForumTopicTest">
-        <activity android:name=".TopicDetails" ></activity>
+        <activity android:name=".TopicDetailActivity" ></activity>
         <activity android:name=".AddPostActivity" />
         <activity android:name=".ForumRecyclerView" />
         <activity android:name=".RegisterActivity" />

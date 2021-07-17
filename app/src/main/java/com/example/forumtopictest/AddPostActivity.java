@@ -160,7 +160,6 @@ public class AddPostActivity extends AppCompatActivity {
 
 
         private void openGallery() {
-            //TODO: open gallery intent and wait for user to pick an image !
 
             Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
             galleryIntent.setType("image/*");

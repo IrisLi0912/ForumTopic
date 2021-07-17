@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -33,10 +34,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-public class TopicDetails extends AppCompatActivity {
+public class TopicDetailActivity extends AppCompatActivity {
 
     ImageView disDetailCover, profilePic,btnLike;
-    TextView disTag, disTitle, disDate_Author, disDetaildes,userName; //noComments
+    TextView disTag, disTitle, disDate_Author, disDetaildes,userName,noComments;
     EditText addCommentDetail;
     Button btnPostComment;
     RecyclerView rvComment;
@@ -65,6 +66,8 @@ public class TopicDetails extends AppCompatActivity {
         disDate_Author = findViewById(R.id.ttDiscussionDate);
         disDetaildes = findViewById(R.id.ttDiscussionDetailDes);
         userName = findViewById(R.id.ttDiscussionUsername);
+        noComments = findViewById(R.id.ttDiscussionCommentNumber);
+
 
         addCommentDetail = findViewById(R.id.ttComment);
         btnPostComment = findViewById(R.id.postCommentbtn);
@@ -105,15 +108,14 @@ public class TopicDetails extends AppCompatActivity {
                         }
                     });
 
-
                 }
 
 
         });
 
-        DatabaseReference likeRef = firebaseDatabase.getReference().child("Posts").child("Likes");
-        likeRef.keepSynced(true);
-        likeRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference ref = firebaseDatabase.getReference().child("Likes");
+        ref.keepSynced(true);
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(postID).hasChild(firebaseUser.getUid())) {
@@ -132,6 +134,11 @@ public class TopicDetails extends AppCompatActivity {
 
             }
         });
+
+
+
+
+
 
 
         // enable add comment button clickable
@@ -183,7 +190,7 @@ public class TopicDetails extends AppCompatActivity {
         disTitle.setText(getIntent().getStringExtra("postTitle"));
 
         //TODO： username cannot be show on topicdetail page
-        userName.setText(getIntent().getStringExtra("userName"));
+        userName.setText(getIntent().getStringExtra("uName"));
 
 //        String postDescription = getIntent().getExtras().getString("disDes");
         disDetaildes.setText(getIntent().getStringExtra("postDes"));
@@ -193,11 +200,9 @@ public class TopicDetails extends AppCompatActivity {
         // get post id
         postID = getIntent().getStringExtra("postID");
 
-//        String date = timestampToString(getIntent().getExtras().getLong("postDate"));
 
         //TODO: the date can not be show on topic detail page
-        String date = timestampToString(getIntent().getExtras().getLong("postTime"));
-        disDate_Author.setText(date);
+        disDate_Author.setText(timestampToString(getIntent().getExtras().getLong("postTime")));
 
         // ini Recyclerview Comment
         inirvComment();
@@ -208,7 +213,6 @@ public class TopicDetails extends AppCompatActivity {
     private void inirvComment() {
 
         rvComment.setLayoutManager(new LinearLayoutManager(this));
-
 
         DatabaseReference commentRef = firebaseDatabase.getReference().child("Comment");
         commentRef.addValueEventListener(new ValueEventListener() {
@@ -247,7 +251,6 @@ public class TopicDetails extends AppCompatActivity {
                 uploadCommentCount(commentCount);
 
 
-
                 commentAdapter = new CommentAdapter(getApplicationContext(), listComment);
                 rvComment.setAdapter(commentAdapter);
             }
@@ -258,7 +261,7 @@ public class TopicDetails extends AppCompatActivity {
                 HashMap hashMap = new HashMap();
                 hashMap.put("commentCount", commentCount);
 
-                CommentCountRef .child(postID).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
+                CommentCountRef.child(postID).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
                     @Override
                     public void onSuccess(Object o) {
                         System.out.println("Comment Count updated" + commentCount);
@@ -281,10 +284,15 @@ public class TopicDetails extends AppCompatActivity {
 
     private String timestampToString(long time) {
 
-        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-        calendar.setTimeInMillis(time);
-        String date = DateFormat.format("dd-MM-yyyy hh:mm aa",calendar).toString();
-        return date;
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat currentdata = new SimpleDateFormat("dd-MM-yyyy");
+        String saveCurrentData = currentdata.format(cal.getTime());
+        return saveCurrentData;
+
+//        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+//        calendar.setTimeInMillis(time);
+//        String date = DateFormat.format("dd-MM-yyyy",calendar).toString();
+//        return date;
 
 
     }

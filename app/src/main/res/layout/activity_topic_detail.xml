@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TopicDetails">
+    tools:context=".TopicDetailActivity">
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -70,11 +70,9 @@
 
         <TextView
             android:id="@+id/ttDiscussionUsername"
-            android:layout_width="152dp"
-            android:layout_height="15dp"
-            android:layout_marginBottom="274dp"
+            android:layout_width="158dp"
+            android:layout_height="9dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ttDiscussionDetailTitle" />
 
         <TextView
@@ -121,30 +119,6 @@
             app:layout_constraintStart_toStartOf="@+id/ivCurrentUserPic"
             app:layout_constraintTop_toBottomOf="@+id/ivCurrentUserPic" />
 
-        <TextView
-            android:id="@+id/ttNumberOfComments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="32"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/postCommentbtn"
-            app:layout_constraintTop_toBottomOf="@+id/postCommentbtn" />
-
-        <TextView
-            android:id="@+id/textview9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="8dp"
-            android:text="Comments"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/ttNumberOfComments"
-            app:layout_constraintTop_toBottomOf="@+id/postCommentbtn" />
-
         <ImageView
             android:id="@+id/likeBtn"
             android:layout_width="32dp"
@@ -160,10 +134,10 @@
             android:id="@+id/rvComments"
             android:layout_width="372dp"
             android:layout_height="153dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintEnd_toEndOf="@+id/ttComment"
-            app:layout_constraintStart_toStartOf="@+id/ttNumberOfComments"
-            app:layout_constraintTop_toBottomOf="@+id/textview9" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postCommentbtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
